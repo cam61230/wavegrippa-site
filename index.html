@@ -157,7 +157,8 @@ section{min-height:100vh;padding:120px 24px 80px;position:relative}
 .stat-num{font-size:1.75rem;font-weight:700;background:var(--grad);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .stat-label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
-@media(max-width:768px){.about-grid{grid-template-columns:1fr}.about-img{max-width:300px;margin:0 auto}}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}.about-img{max-width:300px;margin:0 auto}
+.embed-grid{grid-template-columns:1fr!important}}
 
 /* LICENSING / FORM */
 .licensing-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
@@ -276,7 +277,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
       </div>
     </div>
 
-    <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px" class="embed-grid">
       <div style="border-radius:var(--radius);overflow:hidden">
         <iframe src="https://open.spotify.com/embed/artist/5OyCE9jxm6ePgRIM7H2Lp0?theme=0" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:var(--radius)"></iframe>
       </div>
