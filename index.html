@@ -392,10 +392,11 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
         <p style="font-size:.85rem">All music © wavegrippa. Licensing terms negotiated per project because one-size-fits-all is for socks, not music rights.</p>
       </div>
       <div>
-        <form class="form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Sent! 🫘 Nice one.';setTimeout(()=>this.querySelector('button').textContent='Send It',3000)">
-          <input type="text" placeholder="Your Name" required>
-          <input type="email" placeholder="Email Address" required>
-          <select>
+        <form class="form" action="https://formspree.io/f/info@wavegrippa.com" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="hidden" name="_subject" value="New enquiry from wavegrippa.com">
+          <select name="enquiry">
             <option value="" disabled selected>What's This About?</option>
             <option>Sync / Film / TV</option>
             <option>Custom Production</option>
@@ -404,7 +405,9 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
             <option>Just Saying Hello</option>
             <option>General Enquiry</option>
           </select>
-          <textarea placeholder="Tell us more... (budget, timeline, project details)"></textarea>
+          <textarea name="message" placeholder="Tell us more... (budget, timeline, project details)"></textarea>
+          <input type="text" name="_gotcha" style="display:none">
+          <input type="hidden" name="_next" value="https://cam61230.github.io/wavegrippa-site/#licensing">
           <button type="submit">Send It</button>
         </form>
       </div>
