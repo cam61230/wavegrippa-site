@@ -44,6 +44,9 @@
 [data-theme="light"] .hero-bg-grid{background-image:linear-gradient(rgba(106,27,224,.08) 1px,transparent 1px),
   linear-gradient(90deg,rgba(106,27,224,.08) 1px,transparent 1px)}
 [data-theme="light"] ::selection{background:var(--accent);color:#fff}
+[data-theme="light"] .hero-bg-grid{display:none}
+[data-theme="light"] .hero::before{background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(106,27,224,.06),transparent 70%),
+  radial-gradient(ellipse 60% 50% at 70% 60%,rgba(217,26,120,.04),transparent 60%)}
 html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 a{color:var(--accent3);text-decoration:none;transition:color .2s}
