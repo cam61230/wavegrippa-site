@@ -308,11 +308,19 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
       </div>
     </div>
 
-    <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px" class="embed-grid">
-      <div style="border-radius:var(--radius);overflow:hidden">
+    <div style="margin-top:40px;max-width:600px;margin-left:auto;margin-right:auto">
+      <div style="display:flex;justify-content:center;gap:8px;margin-bottom:16px">
+        <button class="embed-tab active" id="tabSpotify" onclick="showEmbed('spotify')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:var(--text-bright);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
+          <i class="fab fa-spotify" style="color:#1DB954"></i> Spotify
+        </button>
+        <button class="embed-tab" id="tabApple" onclick="showEmbed('apple')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--text-dim);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
+          <i class="fab fa-apple" style="color:#fc3c44"></i> Apple Music
+        </button>
+      </div>
+      <div id="embedSpotify" style="border-radius:var(--radius);overflow:hidden">
         <iframe id="spotifyEmbed" src="https://open.spotify.com/embed/artist/5OyCE9jxm6ePgRIM7H2Lp0?theme=0" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:var(--radius)"></iframe>
       </div>
-      <div style="border-radius:var(--radius);overflow:hidden">
+      <div id="embedApple" style="border-radius:var(--radius);overflow:hidden;display:none">
         <iframe id="appleEmbed" src="https://embed.music.apple.com/gb/album/control-single/1575698970?theme=dark" width="100%" height="250" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; encrypted-media" style="border-radius:var(--radius)"></iframe>
       </div>
     </div>
@@ -542,6 +550,23 @@ document.getElementById('contactForm').addEventListener('submit',async function(
     btn.textContent='Send It';btn.disabled=false;
   }
 });
+
+// Embed toggle (Spotify/Apple Music)
+function showEmbed(which){
+  const sp=document.getElementById('embedSpotify');
+  const am=document.getElementById('embedApple');
+  const tabSp=document.getElementById('tabSpotify');
+  const tabAm=document.getElementById('tabApple');
+  if(which==='spotify'){
+    sp.style.display='block';am.style.display='none';
+    tabSp.style.background='rgba(255,255,255,.1)';tabSp.style.color='var(--text-bright)';
+    tabAm.style.background='transparent';tabAm.style.color='var(--text-dim)';
+  }else{
+    sp.style.display='none';am.style.display='block';
+    tabAm.style.background='rgba(255,255,255,.1)';tabAm.style.color='var(--text-bright)';
+    tabSp.style.background='transparent';tabSp.style.color='var(--text-dim)';
+  }
+}
 
 // Theme tune player
 function toggleThemeTune(){
