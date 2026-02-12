@@ -489,9 +489,7 @@ function setTheme(t){
   themeIcon.className=t==='light'?'fas fa-sun':'fas fa-moon';
   localStorage.setItem('wg-theme',t);
   // Update embeds
-  const sp=document.getElementById('spotifyEmbed');
   const am=document.getElementById('appleEmbed');
-  if(sp)sp.src=sp.src.replace(/theme=[01]/,'theme='+(t==='light'?'1':'0'));
   if(am)am.src=am.src.replace(/theme=(dark|light)/,'theme='+(t==='light'?'light':'dark'));
 }
 themeToggle.addEventListener('click',()=>{
