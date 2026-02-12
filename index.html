@@ -310,10 +310,10 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
 
     <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px" class="embed-grid">
       <div style="border-radius:var(--radius);overflow:hidden">
-        <iframe src="https://open.spotify.com/embed/artist/5OyCE9jxm6ePgRIM7H2Lp0?theme=0" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:var(--radius)"></iframe>
+        <iframe id="spotifyEmbed" src="https://open.spotify.com/embed/artist/5OyCE9jxm6ePgRIM7H2Lp0?theme=0" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:var(--radius)"></iframe>
       </div>
       <div style="border-radius:var(--radius);overflow:hidden">
-        <iframe src="https://embed.music.apple.com/gb/album/control-single/1575698970?theme=dark" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; encrypted-media" style="border-radius:var(--radius)"></iframe>
+        <iframe id="appleEmbed" src="https://embed.music.apple.com/gb/album/control-single/1575698970?theme=dark" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; encrypted-media" style="border-radius:var(--radius)"></iframe>
       </div>
     </div>
   </div>
@@ -488,6 +488,11 @@ function setTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   themeIcon.className=t==='light'?'fas fa-sun':'fas fa-moon';
   localStorage.setItem('wg-theme',t);
+  // Update embeds
+  const sp=document.getElementById('spotifyEmbed');
+  const am=document.getElementById('appleEmbed');
+  if(sp)sp.src=sp.src.replace(/theme=[01]/,'theme='+(t==='light'?'1':'0'));
+  if(am)am.src=am.src.replace(/theme=(dark|light)/,'theme='+(t==='light'?'light':'dark'));
 }
 themeToggle.addEventListener('click',()=>{
   const current=document.documentElement.getAttribute('data-theme')||'dark';
