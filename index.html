@@ -392,7 +392,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
         <p style="font-size:.85rem">All music © wavegrippa. Licensing terms negotiated per project because one-size-fits-all is for socks, not music rights.</p>
       </div>
       <div>
-        <form class="form" action="https://formspree.io/f/xgolaaog" method="POST">
+        <form class="form" id="contactForm">
           <input type="text" name="name" placeholder="Your Name" required>
           <input type="email" name="email" placeholder="Email Address" required>
           <select name="enquiry">
@@ -406,8 +406,8 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
           </select>
           <textarea name="message" placeholder="Tell us more... (budget, timeline, project details)"></textarea>
           <input type="hidden" name="_subject" value="New enquiry from wavegrippa.com">
-          <input type="hidden" name="_next" value="https://cam61230.github.io/wavegrippa-site/#licensing">
-          <button type="submit">Send It</button>
+          <button type="submit" id="cf-btn">Send It</button>
+          <div id="cf-status" style="display:none;text-align:center;padding:20px;border-radius:var(--radius-sm);margin-top:8px"></div>
         </form>
       </div>
     </div>
@@ -467,6 +467,33 @@ const obs=new IntersectionObserver(entries=>{
   }})
 },{threshold:.3,rootMargin:'-64px 0px 0px 0px'});
 sections.forEach(s=>obs.observe(s));
+
+// Contact form (AJAX)
+document.getElementById('contactForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('cf-btn');
+  const status=document.getElementById('cf-status');
+  btn.disabled=true;btn.textContent='Sending...';
+  try{
+    const res=await fetch('https://formspree.io/f/xgolaaog',{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+    if(res.ok){
+      status.style.display='block';
+      status.style.background='rgba(123,47,255,.15)';
+      status.style.color='var(--accent3)';
+      status.innerHTML='<strong>Message sent! 🎧</strong><br>Nice one — we\'ll get back to you soon.';
+      this.reset();btn.textContent='Send It';btn.disabled=false;
+      setTimeout(()=>{status.style.display='none'},8000);
+    }else{
+      throw new Error();
+    }
+  }catch(err){
+    status.style.display='block';
+    status.style.background='rgba(255,45,149,.15)';
+    status.style.color='var(--accent2)';
+    status.innerHTML='Something went wrong — try emailing <a href="mailto:info@wavegrippa.com" style="color:var(--accent3)">info@wavegrippa.com</a> directly.';
+    btn.textContent='Send It';btn.disabled=false;
+  }
+});
 
 // Parallax orbs on mouse
 document.addEventListener('mousemove',e=>{
