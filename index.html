@@ -234,9 +234,10 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
     <div class="hero-bean">// electronic music producer & multi-genre DJ</div>
     <h1>wavegrippa</h1>
     <p class="hero-tagline">Electronic music producer & multi-genre DJ making tunes that slap harder than a wet fish on a Tuesday morning.</p>
-    <a href="#music" class="hero-cta">
-      <i class="fas fa-play"></i> Listen to the Theme Tune
-    </a>
+    <button class="hero-cta" id="themeBtn" onclick="toggleThemeTune()">
+      <i class="fas fa-play" id="themeBtnIcon"></i> <span id="themeBtnText">Listen to the Theme Tune</span>
+    </button>
+    <audio id="themeAudio" src="audio/wavegrippasnippet.mp3" preload="auto"></audio>
   </div>
   <div class="hero-scroll">
     scroll on down
@@ -491,6 +492,19 @@ document.getElementById('contactForm').addEventListener('submit',async function(
     status.innerHTML='Something went wrong — try emailing <a href="mailto:info@wavegrippa.com" style="color:var(--accent3)">info@wavegrippa.com</a> directly.';
     btn.textContent='Send It';btn.disabled=false;
   }
+});
+
+// Theme tune player
+function toggleThemeTune(){
+  const a=document.getElementById('themeAudio');
+  const icon=document.getElementById('themeBtnIcon');
+  const text=document.getElementById('themeBtnText');
+  if(a.paused){a.play();icon.className='fas fa-pause';text.textContent='Now Playing...';}
+  else{a.pause();icon.className='fas fa-play';text.textContent='Listen to the Theme Tune';}
+}
+document.getElementById('themeAudio').addEventListener('ended',function(){
+  document.getElementById('themeBtnIcon').className='fas fa-play';
+  document.getElementById('themeBtnText').textContent='Listen to the Theme Tune';
 });
 
 // Parallax orbs on mouse
