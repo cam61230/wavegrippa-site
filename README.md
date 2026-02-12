@@ -31,6 +31,12 @@
 - **SSL:** Free via GitHub Pages
 - **Cost:** £0/year (save £30 vs Dynadot hosting)
 
+### Email
+- **info@wavegrippa.com** → forwards to wavegrippa@gmail.com (Dynadot free forwarding)
+- **Contact form:** Formspree (free tier, 50 submissions/month)
+- First form submission triggers a Formspree verification email — needs clicking to activate
+- DNS propagation: may take up to 24hrs
+
 ### Deployment Steps (when ready)
 1. Create GitHub repo for wavegrippa site
 2. Push site files to repo

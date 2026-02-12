@@ -392,11 +392,10 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
         <p style="font-size:.85rem">All music © wavegrippa. Licensing terms negotiated per project because one-size-fits-all is for socks, not music rights.</p>
       </div>
       <div>
-        <form class="form" action="https://formspree.io/f/info@wavegrippa.com" method="POST">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Email Address" required>
-          <input type="hidden" name="_subject" value="New enquiry from wavegrippa.com">
-          <select name="enquiry">
+        <form class="form" id="contactForm">
+          <input type="text" id="cf-name" placeholder="Your Name" required>
+          <input type="email" id="cf-email" placeholder="Email Address" required>
+          <select id="cf-subject">
             <option value="" disabled selected>What's This About?</option>
             <option>Sync / Film / TV</option>
             <option>Custom Production</option>
@@ -405,9 +404,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
             <option>Just Saying Hello</option>
             <option>General Enquiry</option>
           </select>
-          <textarea name="message" placeholder="Tell us more... (budget, timeline, project details)"></textarea>
-          <input type="text" name="_gotcha" style="display:none">
-          <input type="hidden" name="_next" value="https://cam61230.github.io/wavegrippa-site/#licensing">
+          <textarea id="cf-message" placeholder="Tell us more... (budget, timeline, project details)"></textarea>
           <button type="submit">Send It</button>
         </form>
       </div>
@@ -468,6 +465,17 @@ const obs=new IntersectionObserver(entries=>{
   }})
 },{threshold:.3,rootMargin:'-64px 0px 0px 0px'});
 sections.forEach(s=>obs.observe(s));
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('cf-name').value;
+  const email=document.getElementById('cf-email').value;
+  const subject=document.getElementById('cf-subject').value||'Website Enquiry';
+  const message=document.getElementById('cf-message').value;
+  const body=`Name: ${name}%0AEmail: ${email}%0ASubject: ${subject}%0A%0A${encodeURIComponent(message)}`;
+  window.location.href=`mailto:info@wavegrippa.com?subject=${encodeURIComponent('wavegrippa.com: '+subject)}&body=${body}`;
+});
 
 // Parallax orbs on mouse
 document.addEventListener('mousemove',e=>{
