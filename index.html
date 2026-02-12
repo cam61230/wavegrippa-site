@@ -498,9 +498,9 @@ themeToggle.addEventListener('click',()=>{
   const current=document.documentElement.getAttribute('data-theme')||'dark';
   setTheme(current==='dark'?'light':'dark');
 });
-// Load saved theme
+// Load saved theme (default: dark)
 const saved=localStorage.getItem('wg-theme');
-if(saved)setTheme(saved);
+if(saved&&saved!=='dark')setTheme(saved);
 
 // Burger menu
 const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
