@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wavegrippa — electronic music producer & multi-genre DJ</title>
+<meta name="description" content="wavegrippa — electronic music producer, multi-genre DJ, and certified bean enthusiast. Music for humans who like good things.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@font-face{font-family:'Uroob';src:url('fonts/Uroob-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;
+--text:#e8e6e3;--text-dim:#8a8a9a;--text-bright:#ffffff;
+--accent:#7b2fff;--accent2:#ff2d95;--accent3:#00e5ff;
+--grad:linear-gradient(135deg,var(--accent),var(--accent2));
+--grad2:linear-gradient(135deg,var(--accent2),var(--accent3));
+--radius:12px;--radius-sm:8px;
+--font:'Space Grotesk',system-ui,sans-serif;
+--mono:'JetBrains Mono',monospace;
+--nav-h:64px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:var(--accent3);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent2)}
+img{max-width:100%;display:block}
+::selection{background:var(--accent);color:#fff}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;
+  backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
+  background:rgba(10,10,15,.75);border-bottom:1px solid rgba(123,47,255,.15);
+  transition:background .3s}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:100%;
+  display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Uroob','Space Grotesk',system-ui,sans-serif;
+  font-weight:400;font-size:1.5rem;letter-spacing:-.01em;
+  background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-logo span{font-size:.7em;opacity:.6;-webkit-text-fill-color:var(--text-dim);margin-left:6px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--text-dim);font-size:.875rem;font-weight:500;letter-spacing:.02em;
+  position:relative;padding:4px 0;transition:color .2s}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;
+  background:var(--grad);transition:width .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--text-bright)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+
+/* HAMBURGER */
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:1001}
+.burger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s;border-radius:2px}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  .nav-links{position:fixed;top:0;right:-100%;width:280px;height:100vh;
+    flex-direction:column;gap:0;padding:80px 32px 32px;
+    background:rgba(10,10,15,.97);backdrop-filter:blur(30px);
+    transition:right .35s cubic-bezier(.4,0,.2,1);border-left:1px solid rgba(123,47,255,.2)}
+  .nav-links.open{right:0}
+  .nav-links a{font-size:1.1rem;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .burger{display:flex}
+}
+
+/* SECTIONS */
+section{min-height:100vh;padding:120px 24px 80px;position:relative}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--mono);font-size:.75rem;text-transform:uppercase;
+  letter-spacing:.15em;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.section-label::before{content:'//';opacity:.5}
+.section-title{font-size:clamp(2rem,5vw,3rem);font-weight:700;letter-spacing:-.03em;
+  margin-bottom:16px;color:var(--text-bright)}
+.section-subtitle{color:var(--text-dim);font-size:1.05rem;max-width:600px;margin-bottom:48px}
+
+/* HERO */
+.hero{display:flex;align-items:center;justify-content:center;text-align:center;
+  min-height:100vh;padding-top:var(--nav-h);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(123,47,255,.12),transparent 70%),
+  radial-gradient(ellipse 60% 50% at 70% 60%,rgba(255,45,149,.08),transparent 60%)}
+.hero-bg-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(123,47,255,.06) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(123,47,255,.06) 1px,transparent 1px);
+  background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black,transparent)}
+.hero-content{position:relative;z-index:1}
+.hero-bean{font-size:.9rem;color:var(--accent2);margin-bottom:16px;font-family:var(--mono)}
+.hero h1{font-family:'Uroob','Space Grotesk',system-ui,sans-serif;
+  font-size:clamp(4.5rem,15vw,10rem);font-weight:400;letter-spacing:-.02em;
+  line-height:.9;margin-bottom:20px;
+  background:linear-gradient(135deg,#fff 0%,var(--accent3) 40%,var(--accent) 70%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-tagline{font-size:clamp(1rem,2.5vw,1.35rem);color:var(--text-dim);
+  max-width:540px;margin:0 auto 40px;line-height:1.5}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;
+  padding:16px 36px;border-radius:50px;font-weight:600;font-size:1rem;
+  background:var(--grad);color:#fff;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;box-shadow:0 4px 30px rgba(123,47,255,.35)}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(123,47,255,.5);color:#fff}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  color:var(--text-dim);font-size:.75rem;display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* CARDS / GRID */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);
+  overflow:hidden;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(123,47,255,.3)}
+.card-img{height:200px;position:relative;overflow:hidden}
+.card-img-1{background:linear-gradient(135deg,#1a0533,#7b2fff,#ff2d95)}
+.card-img-2{background:linear-gradient(135deg,#0a1628,#00e5ff,#7b2fff)}
+.card-img-3{background:linear-gradient(135deg,#1a0a28,#ff2d95,#ff8a00)}
+.card-body{padding:24px}
+.card-body h3{font-size:1.15rem;font-weight:600;margin-bottom:6px;color:var(--text-bright)}
+.card-body p{color:var(--text-dim);font-size:.9rem}
+.card-tag{display:inline-block;font-family:var(--mono);font-size:.7rem;padding:4px 10px;
+  border-radius:20px;background:rgba(123,47,255,.15);color:var(--accent);margin-top:12px}
+
+/* EMBED PLACEHOLDER */
+.embed-placeholder{background:var(--bg3);border:1px dashed rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:40px;text-align:center;color:var(--text-dim);
+  font-family:var(--mono);font-size:.85rem;display:flex;flex-direction:column;align-items:center;gap:12px}
+.embed-placeholder i{font-size:2rem;opacity:.4}
+
+/* MIX LIST */
+.mix-list{display:flex;flex-direction:column;gap:16px}
+.mix-item{display:flex;align-items:center;gap:20px;padding:20px 24px;
+  background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);
+  transition:border-color .2s,transform .2s}
+.mix-item:hover{border-color:rgba(0,229,255,.25);transform:translateX(4px)}
+.mix-number{font-family:var(--mono);font-size:2rem;font-weight:700;
+  background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  min-width:60px}
+.mix-info h3{font-size:1.05rem;font-weight:600;color:var(--text-bright);margin-bottom:2px}
+.mix-info p{font-size:.85rem;color:var(--text-dim)}
+.mix-play{margin-left:auto;width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;color:var(--accent3);
+  cursor:pointer;transition:all .2s;flex-shrink:0}
+.mix-play:hover{background:var(--accent3);color:var(--bg);border-color:var(--accent3)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about-img{aspect-ratio:1;border-radius:var(--radius);position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--bg3),var(--accent) 40%,var(--accent2));
+  display:flex;align-items:center;justify-content:center}
+.about-img-text{font-size:6rem;filter:grayscale(.3)}
+.about-text h3{font-size:1.5rem;font-weight:600;color:var(--text-bright);margin-bottom:16px}
+.about-text p{margin-bottom:16px;color:var(--text-dim)}
+.about-text .highlight{color:var(--accent3);font-weight:500}
+.stat-row{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:1.75rem;font-weight:700;background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}.about-img{max-width:300px;margin:0 auto}}
+
+/* LICENSING / FORM */
+.licensing-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+@media(max-width:768px){.licensing-grid{grid-template-columns:1fr}}
+.licensing-info{color:var(--text-dim)}
+.licensing-info h3{color:var(--text-bright);font-size:1.2rem;margin:24px 0 8px}
+.licensing-info ul{list-style:none;padding:0}
+.licensing-info li{padding:6px 0;display:flex;align-items:center;gap:10px}
+.licensing-info li::before{content:'◆';color:var(--accent);font-size:.6rem}
+.form{display:flex;flex-direction:column;gap:16px}
+.form input,.form textarea,.form select{
+  background:var(--bg3);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-sm);
+  padding:14px 16px;color:var(--text);font-family:var(--font);font-size:.95rem;
+  transition:border-color .2s;outline:none}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--accent)}
+.form textarea{min-height:120px;resize:vertical}
+.form button{padding:14px 32px;border-radius:50px;border:none;cursor:pointer;
+  background:var(--grad);color:#fff;font-weight:600;font-size:1rem;font-family:var(--font);
+  transition:transform .2s,box-shadow .2s}
+.form button:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(123,47,255,.4)}
+
+/* LINKS */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;max-width:700px;margin:0 auto}
+.link-card{display:flex;flex-direction:column;align-items:center;gap:12px;padding:32px 16px;
+  background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);
+  transition:all .25s;cursor:pointer;text-align:center}
+.link-card:hover{border-color:rgba(123,47,255,.4);transform:translateY(-4px);
+  box-shadow:0 8px 30px rgba(123,47,255,.15)}
+.link-card i{font-size:2rem}
+.link-card span{font-size:.85rem;font-weight:500;color:var(--text-dim)}
+.link-card:hover span{color:var(--text-bright)}
+.spotify{color:#1DB954}.apple{color:#fc3c44}.youtube{color:#ff0000}
+.soundcloud{color:#ff5500}.instagram{color:#e4405f}.tiktok{color:#fff}
+
+/* FOOTER */
+footer{padding:40px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.06);
+  color:var(--text-dim);font-size:.8rem}
+footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2);font-size:.75rem}
+
+/* GLOW ORB */
+.orb{position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;z-index:-1;
+  filter:blur(120px);opacity:.15;transition:all 2s ease}
+.orb-1{top:-100px;left:-100px;background:var(--accent)}
+.orb-2{bottom:-100px;right:-100px;background:var(--accent2)}
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">wavegrippa <span>🫘</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#music">Music</a></li>
+      <li><a href="#mixes">Mixes</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#licensing">Licensing</a></li>
+      <li><a href="#links">Links</a></li>
+    </ul>
+    <div class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <div class="hero-bean">🫘 certified bean-powered since day one</div>
+    <h1>wavegrippa</h1>
+    <p class="hero-tagline">Electronic music producer & multi-genre DJ making tunes that slap harder than a wet fish on a Tuesday morning.</p>
+    <a href="#music" class="hero-cta">
+      <i class="fas fa-play"></i> Listen to the Theme Tune
+    </a>
+  </div>
+  <div class="hero-scroll">
+    scroll down, you muppet
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+  <div class="container">
+    <div class="section-label">Releases</div>
+    <h2 class="section-title">The Tunes</h2>
+    <p class="section-subtitle">Proper electronic music. No AI slop. Just a human, a DAW, and an unreasonable amount of tea.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img card-img-1"></div>
+        <div class="card-body">
+          <h3>wavegrippa (Theme Tune)</h3>
+          <p>The best thing these ears have ever produced. Literally a theme tune for existing. You're welcome.</p>
+          <span class="card-tag">Latest Release</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img card-img-2"></div>
+        <div class="card-body">
+          <h3>Coming Soon™</h3>
+          <p>More bangers in the pipeline. Subscribe to avoid missing out and subsequently crying about it.</p>
+          <span class="card-tag">In Progress</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img card-img-3"></div>
+        <div class="card-body">
+          <h3>The Back Catalogue</h3>
+          <p>A selection of earlier works. Some good, some questionable, all made with love and beans.</p>
+          <span class="card-tag">Archive</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div class="embed-placeholder">
+        <i class="fab fa-spotify"></i>
+        Spotify Embed Goes Here
+        <span style="font-size:.7rem;opacity:.6">( once the label stops being weird )</span>
+      </div>
+      <div class="embed-placeholder">
+        <i class="fab fa-apple"></i>
+        Apple Music Embed Goes Here
+        <span style="font-size:.7rem;opacity:.6">( for the fancy folk )</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIXES -->
+<section id="mixes" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">DJ Sets</div>
+    <h2 class="section-title">The Mixes</h2>
+    <p class="section-subtitle">Multi-genre DJ sets. One minute it's house, next it's jungle, then somehow we're in a DnB rave at a baked bean festival. Keep up.</p>
+    <div class="mix-list">
+      <div class="mix-item">
+        <div class="mix-number">01</div>
+        <div class="mix-info">
+          <h3>Late Night Bean Raving Vol. 1</h3>
+          <p>House / Tech House / Breaks — 62 min</p>
+        </div>
+        <div class="mix-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="mix-item">
+        <div class="mix-number">02</div>
+        <div class="mix-info">
+          <h3>Jungle Brunch</h3>
+          <p>Jungle / DnB / Breakbeat — 48 min</p>
+        </div>
+        <div class="mix-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="mix-item">
+        <div class="mix-number">03</div>
+        <div class="mix-info">
+          <h3>Duvet Day Dubs</h3>
+          <p>Garage / Dub / Ambient — 55 min</p>
+        </div>
+        <div class="mix-play"><i class="fas fa-play"></i></div>
+      </div>
+      <div class="mix-item">
+        <div class="mix-number">04</div>
+        <div class="mix-info">
+          <h3>Absolute Scenes</h3>
+          <p>Everything / Anything / Yes — 73 min</p>
+        </div>
+        <div class="mix-play"><i class="fas fa-play"></i></div>
+      </div>
+    </div>
+    <div class="embed-placeholder" style="margin-top:32px">
+      <i class="fab fa-youtube"></i>
+      YouTube DJ Channel Embed
+      <span style="font-size:.7rem;opacity:.6">( subscribe or don't, no pressure, but also please do )</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">The Story</div>
+    <h2 class="section-title">Who's This Then?</h2>
+    <div class="about-grid">
+      <div class="about-img">
+        <div class="about-img-text">🫘</div>
+      </div>
+      <div class="about-text">
+        <h3>Producer. DJ. Bean Enthusiast.</h3>
+        <p><span class="highlight">wavegrippa</span> is an electronic music producer and multi-genre DJ from the UK. Started making tunes in a bedroom (as is tradition), graduated to making tunes in a slightly bigger room with better monitors.</p>
+        <p>The sound? Hard to pin down. Could be deep rolling house one minute, face-melting DnB the next, with a cheeky garage bootleg thrown in for good measure. If you want to be put in a genre box, you've come to the wrong place, mate.</p>
+        <p>Currently riding high on the <span class="highlight">wavegrippa theme tune</span> — universally agreed (by one person) to be the best production yet. Anti-corporate, pro-bean, and absolutely not taking ourselves too seriously.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Beans Consumed</div></div>
+          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Theme Tune</div></div>
+          <div class="stat"><div class="stat-num">0</div><div class="stat-label">Corporate Deals</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Vibes</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LICENSING -->
+<section id="licensing" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">Sync & Licensing</div>
+    <h2 class="section-title">Use the Music</h2>
+    <p class="section-subtitle">Want wavegrippa sounds in your film, advert, game, or interpretive dance piece? Let's have a chat.</p>
+    <div class="licensing-grid">
+      <div class="licensing-info">
+        <h3>What's On Offer</h3>
+        <ul>
+          <li>Sync licensing for film, TV & advertising</li>
+          <li>Custom production & remixes</li>
+          <li>DJ sets for events (beans not included)</li>
+          <li>Music for games & interactive media</li>
+          <li>Bespoke compositions to brief</li>
+        </ul>
+        <h3>Why Bother?</h3>
+        <p>Original electronic music with actual personality. No stock library nonsense. Every track made by a real human who drinks real tea and eats real beans. Direct contact, no middlemen, no faff.</p>
+        <h3>The Legal Bit</h3>
+        <p style="font-size:.85rem">All music © wavegrippa. Licensing terms negotiated per project because one-size-fits-all is for socks, not music rights.</p>
+      </div>
+      <div>
+        <form class="form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Sent! 🫘 Nice one.';setTimeout(()=>this.querySelector('button').textContent='Send It',3000)">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Email Address" required>
+          <select>
+            <option value="" disabled selected>What's This About?</option>
+            <option>Sync / Film / TV</option>
+            <option>Custom Production</option>
+            <option>DJ Booking</option>
+            <option>Collab</option>
+            <option>Just Saying Hello</option>
+            <option>Bean-Related Enquiry</option>
+          </select>
+          <textarea placeholder="Tell us more... (budget, timeline, bean preference)"></textarea>
+          <button type="submit">Send It</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section id="links">
+  <div class="container" style="text-align:center">
+    <div class="section-label" style="justify-content:center">Connect</div>
+    <h2 class="section-title" style="text-align:center">Find wavegrippa</h2>
+    <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center">All the places you can stalk — sorry, <em>follow</em> — the music. Pick your poison.</p>
+    <div class="links-grid">
+      <a class="link-card" href="https://open.spotify.com" target="_blank" rel="noopener">
+        <i class="fab fa-spotify spotify"></i><span>Spotify</span>
+      </a>
+      <a class="link-card" href="https://music.apple.com" target="_blank" rel="noopener">
+        <i class="fab fa-apple apple"></i><span>Apple Music</span>
+      </a>
+      <a class="link-card" href="https://youtube.com" target="_blank" rel="noopener">
+        <i class="fab fa-youtube youtube"></i><span>YouTube</span>
+      </a>
+      <a class="link-card" href="https://soundcloud.com" target="_blank" rel="noopener">
+        <i class="fab fa-soundcloud soundcloud"></i><span>SoundCloud</span>
+      </a>
+      <a class="link-card" href="https://instagram.com" target="_blank" rel="noopener">
+        <i class="fab fa-instagram instagram"></i><span>Instagram</span>
+      </a>
+      <a class="link-card" href="https://tiktok.com" target="_blank" rel="noopener">
+        <i class="fab fa-tiktok tiktok"></i><span>TikTok</span>
+      </a>
+    </div>
+    <p style="margin-top:48px;color:var(--text-dim);font-family:var(--mono);font-size:.8rem">
+      www.wavegrippa.com — because someone had to claim it
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="bean-quote">"in beans we trust" — wavegrippa, probably</div>
+  <p>© 2025 wavegrippa. All rights reserved. No beans were harmed in the making of this website.</p>
+</footer>
+
+<script>
+// Burger menu
+const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');navLinks.classList.remove('open')}));
+
+// Active nav link on scroll
+const sections=document.querySelectorAll('section[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){
+    navLinks.querySelectorAll('a').forEach(a=>a.classList.remove('active'));
+    const link=navLinks.querySelector(`a[href="#${e.target.id}"]`);
+    if(link)link.classList.add('active');
+  }})
+},{threshold:.3,rootMargin:'-64px 0px 0px 0px'});
+sections.forEach(s=>obs.observe(s));
+
+// Parallax orbs on mouse
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/innerWidth-.5)*40,y=(e.clientY/innerHeight-.5)*40;
+  document.querySelector('.orb-1').style.transform=`translate(${x}px,${y}px)`;
+  document.querySelector('.orb-2').style.transform=`translate(${-x}px,${-y}px)`;
+});
+</script>
+</body>
+</html>
