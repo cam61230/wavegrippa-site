@@ -22,6 +22,28 @@
 --mono:'JetBrains Mono',monospace;
 --nav-h:64px;
 }
+[data-theme="light"]{
+--bg:#f5f5f7;--bg2:#e8e8ed;--bg3:#dcdce2;
+--text:#2a2a3a;--text-dim:#6a6a7a;--text-bright:#0a0a0f;
+--accent:#6a1be0;--accent2:#d91a78;--accent3:#0099cc;
+}
+/* Theme toggle */
+.theme-toggle{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s;color:var(--text-dim);font-size:1.1rem;margin-left:12px}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+[data-theme="light"] .theme-toggle{border-color:rgba(0,0,0,.15);background:rgba(0,0,0,.05)}
+[data-theme="light"] .orb{opacity:.06}
+[data-theme="light"] .nav{background:rgba(245,245,247,.85);border-bottom-color:rgba(106,27,224,.15)}
+[data-theme="light"] .card{background:var(--bg2);border-color:rgba(0,0,0,.08)}
+[data-theme="light"] .mix-item{background:var(--bg2);border-color:rgba(0,0,0,.08)}
+[data-theme="light"] .mix-play{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1)}
+[data-theme="light"] .form input,[data-theme="light"] .form textarea,[data-theme="light"] .form select{
+  background:var(--bg3);border-color:rgba(0,0,0,.12);color:var(--text)}
+[data-theme="light"] .link-card{background:var(--bg2);border-color:rgba(0,0,0,.08)}
+[data-theme="light"] .hero-bg-grid{background-image:linear-gradient(rgba(106,27,224,.08) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(106,27,224,.08) 1px,transparent 1px)}
+[data-theme="light"] ::selection{background:var(--accent);color:#fff}
 html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 a{color:var(--accent3);text-decoration:none;transition:color .2s}
@@ -221,8 +243,13 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
       <li><a href="#licensing">Licensing</a></li>
       <li><a href="#links">Links</a></li>
     </ul>
-    <div class="burger" id="burger">
-      <span></span><span></span><span></span>
+    <div style="display:flex;align-items:center">
+      <div class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </div>
+      <div class="burger" id="burger">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </div>
 </nav>
@@ -451,6 +478,22 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
 </footer>
 
 <script>
+// Theme toggle
+const themeToggle=document.getElementById('themeToggle');
+const themeIcon=document.getElementById('themeIcon');
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  themeIcon.className=t==='light'?'fas fa-sun':'fas fa-moon';
+  localStorage.setItem('wg-theme',t);
+}
+themeToggle.addEventListener('click',()=>{
+  const current=document.documentElement.getAttribute('data-theme')||'dark';
+  setTheme(current==='dark'?'light':'dark');
+});
+// Load saved theme
+const saved=localStorage.getItem('wg-theme');
+if(saved)setTheme(saved);
+
 // Burger menu
 const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
 burger.addEventListener('click',()=>{burger.classList.toggle('open');navLinks.classList.toggle('open')});
