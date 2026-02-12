@@ -310,20 +310,20 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
 
     <div style="margin-top:40px;max-width:600px;margin-left:auto;margin-right:auto">
       <div style="display:flex;justify-content:center;gap:8px;margin-bottom:16px">
-        <button class="embed-tab active" id="tabSpotify" onclick="showEmbed('spotify')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:var(--text-bright);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
+        <button class="embed-tab" id="tabSpotify" onclick="showEmbed('spotify')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--text-dim);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
           <i class="fab fa-spotify" style="color:#1DB954"></i> Spotify
         </button>
-        <button class="embed-tab" id="tabBandcamp" onclick="showEmbed('bandcamp')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--text-dim);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
+        <button class="embed-tab active" id="tabBandcamp" onclick="showEmbed('bandcamp')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:var(--text-bright);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
           <i class="fab fa-bandcamp" style="color:#629aa9"></i> Bandcamp
         </button>
         <button class="embed-tab" id="tabApple" onclick="showEmbed('apple')" style="padding:10px 24px;border-radius:50px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--text-dim);cursor:pointer;font-family:var(--font);font-size:.85rem;font-weight:500;transition:all .2s">
           <i class="fab fa-apple" style="color:#fc3c44"></i> Apple Music
         </button>
       </div>
-      <div id="embedSpotify" style="border-radius:var(--radius);overflow:hidden">
+      <div id="embedSpotify" style="border-radius:var(--radius);overflow:hidden;display:none">
         <iframe id="spotifyEmbed" src="https://open.spotify.com/embed/artist/5OyCE9jxm6ePgRIM7H2Lp0?theme=0" width="100%" height="352" frameborder="0" allowfullscreen loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" style="border-radius:var(--radius)"></iframe>
       </div>
-      <div id="embedBandcamp" style="display:none">
+      <div id="embedBandcamp">
         <div style="border-radius:var(--radius);overflow:hidden;margin-bottom:12px">
           <iframe src="https://bandcamp.com/EmbeddedPlayer/album=973081953/size=small/bgcol=0a0a0f/linkcol=7b2fff/tracklist=true/transparent=true/" width="100%" height="42" frameborder="0" allowfullscreen loading="lazy" style="border:0;border-radius:var(--radius)"></iframe>
         </div>
