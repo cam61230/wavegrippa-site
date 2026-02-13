@@ -255,8 +255,8 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
       <li><a href="#links">Links</a></li>
     </ul>
     <div style="display:flex;align-items:center">
-      <div class="theme-toggle" id="marqueeToggle" onclick="toggleMarquee(this)" title="Pause/play animation" style="display:none;margin-right:8px;font-size:.85rem">
-        <i class="fas fa-pause" id="marqueeIcon"></i>
+      <div class="theme-toggle" id="marqueeToggle" onclick="toggleMarquee()" title="Toggle animation" style="display:none;margin-right:8px;font-size:.85rem;cursor:pointer">
+        <span id="marqueeIcon">😊</span>
       </div>
       <div class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">
         <i class="fas fa-moon" id="themeIcon"></i>
@@ -271,7 +271,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg-grid"></div>
-  <div class="hero-marquee-wrap" aria-hidden="true" role="presentation" style="overflow:hidden;position:absolute;top:var(--nav-h);left:0;right:0;bottom:68%;display:flex;flex-direction:column;justify-content:center;opacity:.08;display:flex;flex-direction:column;justify-content:center;gap:10px;pointer-events:none;z-index:0">
+  <div class="hero-marquee-wrap" aria-hidden="true" role="presentation" style="overflow:hidden;position:absolute;top:var(--nav-h);left:0;right:0;bottom:68%;display:none;flex-direction:column;justify-content:center;opacity:.08;flex-direction:column;justify-content:center;gap:10px;pointer-events:none;z-index:0">
     <div class="hero-marquee" style="display:flex;width:max-content;white-space:nowrap;animation:marqueeLeft 100s linear infinite;font-family:'Uroob',sans-serif;font-size:2rem;color:var(--text)">
       <span style="flex-shrink:0">wavegrippa wavegrippa <svg style="display:inline-block;vertical-align:middle;width:.8em;height:.8em;margin:0 .3em" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#FFD700"/><ellipse cx="35" cy="40" rx="5" ry="7" fill="#000"/><ellipse cx="65" cy="40" rx="5" ry="7" fill="#000"/><path d="M25 58 Q50 85 75 58" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/></svg> wavegrippa wavegrippa wavegrippa <svg style="display:inline-block;vertical-align:middle;width:.8em;height:.8em;margin:0 .3em" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#FFD700"/><ellipse cx="35" cy="40" rx="5" ry="7" fill="#000"/><ellipse cx="65" cy="40" rx="5" ry="7" fill="#000"/><path d="M25 58 Q50 85 75 58" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/></svg> wavegrippa wavegrippa </span><span style="flex-shrink:0">wavegrippa wavegrippa <svg style="display:inline-block;vertical-align:middle;width:.8em;height:.8em;margin:0 .3em" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#FFD700"/><ellipse cx="35" cy="40" rx="5" ry="7" fill="#000"/><ellipse cx="65" cy="40" rx="5" ry="7" fill="#000"/><path d="M25 58 Q50 85 75 58" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/></svg> wavegrippa wavegrippa wavegrippa <svg style="display:inline-block;vertical-align:middle;width:.8em;height:.8em;margin:0 .3em" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#FFD700"/><ellipse cx="35" cy="40" rx="5" ry="7" fill="#000"/><ellipse cx="65" cy="40" rx="5" ry="7" fill="#000"/><path d="M25 58 Q50 85 75 58" stroke="#000" stroke-width="5" fill="none" stroke-linecap="round"/></svg> wavegrippa wavegrippa </span>
     </div>
@@ -291,7 +291,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
     </button>
     <audio id="themeAudio" src="audio/wavegrippasnippet.mp3" preload="auto"></audio>
   </div>
-  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:160px;overflow:hidden">
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:160px;overflow:hidden;display:none">
     <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanScroll 45s linear infinite;opacity:.25" class="pacman-inner">
     <svg class="pacman" style="width:2rem;height:2rem" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="45" fill="#FFD700" mask="url(#pacmouth)"/>
@@ -600,16 +600,36 @@ document.querySelectorAll('.hero-marquee span[style*="flex-shrink"]').forEach(sp
   html=html.replace(/wavegrippa/g,(m)=>{count++;return count%2===0?'<span class="wg-outline">&nbsp;'+m+'&nbsp;</span>':m;});
   span.innerHTML=html;
 });
+var marqueeState='off';
 function toggleMarquee(){
+  const wrap=document.querySelector('.hero-marquee-wrap');
+  const pacWrap=document.querySelector('.pacman-inner')?.closest('[aria-hidden]');
   const rows=document.querySelectorAll('.hero-marquee');
   const pac=document.querySelector('.pacman-inner');
   const icon=document.getElementById('marqueeIcon');
-  const paused=rows[0].style.animationPlayState==='paused';
-  const state=paused?'running':'paused';
-  rows.forEach(r=>r.style.animationPlayState=state);
-  if(pac)pac.style.animationPlayState=state;
-  document.querySelectorAll('.pacman-inner svg').forEach(s=>{s.style.animationPlayState=state;paused?s.unpauseAnimations():s.pauseAnimations()});
-  icon.className=paused?'fas fa-pause':'fas fa-play';
+  if(marqueeState==='off'){
+    // Show and play
+    wrap.style.display='flex';
+    if(pacWrap)pacWrap.style.display='block';
+    rows.forEach(r=>r.style.animationPlayState='running');
+    if(pac)pac.style.animationPlayState='running';
+    document.querySelectorAll('.pacman-inner svg').forEach(s=>{try{s.unpauseAnimations()}catch(e){}});
+    icon.innerHTML='<i class="fas fa-pause"></i>';
+    marqueeState='playing';
+  }else if(marqueeState==='playing'){
+    // Pause
+    rows.forEach(r=>r.style.animationPlayState='paused');
+    if(pac)pac.style.animationPlayState='paused';
+    document.querySelectorAll('.pacman-inner svg').forEach(s=>{try{s.pauseAnimations()}catch(e){}});
+    icon.innerHTML='<i class="fas fa-play"></i>';
+    marqueeState='paused';
+  }else{
+    // Hide
+    wrap.style.display='none';
+    if(pacWrap)pacWrap.style.display='none';
+    icon.textContent='😊';
+    marqueeState='off';
+  }
 }
 (function(){
   const wrap=document.querySelector('.hero-marquee-wrap');
