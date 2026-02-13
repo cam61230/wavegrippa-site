@@ -134,6 +134,7 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes marqueeRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
 [data-theme="light"] .pacman-inner{opacity:.8!important}
 @keyframes pacmanScroll{0%{transform:translateX(-120px)}100%{transform:translateX(calc(100vw + 120px))}}
+.wg-outline{-webkit-text-stroke:1px var(--text);-webkit-text-fill-color:transparent}
 @media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}.pacman-inner{animation:none!important}.pac-mouth animate,.pacman-dots animate{animation:none!important}}
 
 /* CARDS / GRID */
@@ -593,6 +594,12 @@ document.getElementById('contactForm').addEventListener('submit',async function(
 });
 
 // Embed toggle (Spotify/Apple Music)
+document.querySelectorAll('.hero-marquee span[style*="flex-shrink"]').forEach(span=>{
+  let html=span.innerHTML;
+  let count=0;
+  html=html.replace(/wavegrippa/g,(m)=>{count++;return count%2===0?'<span class="wg-outline">'+m+'</span>':m;});
+  span.innerHTML=html;
+});
 function toggleMarquee(){
   const rows=document.querySelectorAll('.hero-marquee');
   const pac=document.querySelector('.pacman-inner');
