@@ -341,9 +341,20 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
           <p>Reggae / Dancehall</p>
         </div>
         <div style="display:flex;gap:12px;margin-left:auto">
-          <a href="https://youtu.be/na39VNyCW_Q" target="_blank" rel="noopener" class="mix-play" title="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.mixcloud.com/wavegrippa/reggae-dancehall-mix/" target="_blank" rel="noopener" class="mix-play" title="Mixcloud"><i class="fab fa-mixcloud"></i></a>
-          <a href="https://on.soundcloud.com/0rHz1h4hhGKSP0KyqM" target="_blank" rel="noopener" class="mix-play" title="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+          <button class="mix-play mix-embed-btn" data-target="embed-yt-mix1" title="YouTube"><i class="fab fa-youtube"></i></button>
+          <button class="mix-play mix-embed-btn" data-target="embed-mc-mix1" title="Mixcloud"><i class="fab fa-mixcloud"></i></button>
+          <button class="mix-play mix-embed-btn" data-target="embed-sc-mix1" title="SoundCloud"><i class="fab fa-soundcloud"></i></button>
+        </div>
+        <div id="embed-yt-mix1" class="mix-embed" style="display:none;width:100%;margin-top:12px">
+          <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:var(--radius);overflow:hidden">
+            <iframe src="" data-src="https://www.youtube.com/embed/na39VNyCW_Q" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+        <div id="embed-mc-mix1" class="mix-embed" style="display:none;width:100%;margin-top:12px">
+          <iframe src="" data-src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2Fwavegrippa%2Freggae-dancehall-mix%2F&hide_cover=1&light=1" width="100%" height="120" frameborder="0" style="border-radius:var(--radius)" loading="lazy"></iframe>
+        </div>
+        <div id="embed-sc-mix1" class="mix-embed" style="display:none;width:100%;margin-top:12px">
+          <iframe src="" data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fwavegrippa%2Freggae-dancehall-mix&color=%237b2fff&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false" width="100%" height="166" frameborder="0" scrolling="no" allow="autoplay" style="border-radius:var(--radius)" loading="lazy"></iframe>
         </div>
       </div>
       <div class="mix-item" style="opacity:.45;pointer-events:none">
@@ -561,6 +572,26 @@ function toggleThemeTune(){
 document.getElementById('themeAudio').addEventListener('ended',function(){
   document.getElementById('themeBtnIcon').className='fas fa-play';
   document.getElementById('themeBtnText').textContent='Listen to the Theme Tune';
+});
+
+// Mix embed toggles
+document.querySelectorAll('.mix-embed-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=document.getElementById(btn.dataset.target);
+    if(!target)return;
+    const isOpen=target.style.display!=='none';
+    // Close all embeds in this mix item
+    btn.closest('.mix-item').querySelectorAll('.mix-embed').forEach(e=>{
+      e.style.display='none';
+      const iframe=e.querySelector('iframe');
+      if(iframe)iframe.src='';
+    });
+    if(!isOpen){
+      target.style.display='block';
+      const iframe=target.querySelector('iframe');
+      if(iframe&&iframe.dataset.src)iframe.src=iframe.dataset.src;
+    }
+  });
 });
 
 // Parallax orbs on mouse
