@@ -601,6 +601,7 @@ function toggleMarquee(){
   const state=paused?'running':'paused';
   rows.forEach(r=>r.style.animationPlayState=state);
   if(pac)pac.style.animationPlayState=state;
+  document.querySelectorAll('.pacman-inner svg').forEach(s=>{s.style.animationPlayState=state;paused?s.unpauseAnimations():s.pauseAnimations()});
   icon.className=paused?'fas fa-pause':'fas fa-play';
 }
 (function(){
