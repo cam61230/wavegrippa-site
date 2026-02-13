@@ -135,7 +135,7 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes pacmanScroll{0%{transform:translateX(calc(-30vw - 150px))}100%{transform:translateX(calc(100vw + 150px))}}
 @keyframes pacmanReturn{0%{transform:translateX(calc(100vw + 150px)) scaleX(-1)}100%{transform:translateX(calc(-100vw - 300px)) scaleX(-1)}}
 .wg-outline{-webkit-text-stroke:.5px var(--accent2);-webkit-text-fill-color:var(--text)}
-@media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}.pacman-inner{animation:none!important}.pac-mouth animate,.pacman-dots animate{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}.pacman-inner{animation:none!important}.pacman-return{animation:none!important}.pac-mouth animate,.pacman-dots animate{animation:none!important}.hero-marquee-wrap{display:none!important}.pacman-track{display:none!important}}
 @media(orientation:landscape) and (max-height:500px){
 .pacman-track{bottom:20px!important}
 .hero{min-height:100vh;padding-top:calc(var(--nav-h) + 10px);padding-bottom:60px}
@@ -739,16 +739,26 @@ function showEmbed(which){
 }
 
 // Theme tune player
+function canAnimate(){return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;}
+function startAnimations(){
+  if(!canAnimate())return;
+  if(marqueeState==='off') toggleMarquee();
+}
+function stopAnimations(){
+  if(marqueeState==='playing') toggleMarquee(); // pause
+  if(marqueeState==='paused') toggleMarquee(); // hide
+}
 function toggleThemeTune(){
   const a=document.getElementById('themeAudio');
   const icon=document.getElementById('themeBtnIcon');
   const text=document.getElementById('themeBtnText');
-  if(a.paused){a.play();icon.className='fas fa-pause';text.textContent='Now Playing...';}
-  else{a.pause();icon.className='fas fa-play';text.textContent='Listen to the latest';}
+  if(a.paused){a.play();icon.className='fas fa-pause';text.textContent='Now Playing...';startAnimations();}
+  else{a.pause();icon.className='fas fa-play';text.textContent='Listen to the latest';stopAnimations();}
 }
 document.getElementById('themeAudio').addEventListener('ended',function(){
   document.getElementById('themeBtnIcon').className='fas fa-play';
   document.getElementById('themeBtnText').textContent='Listen to the latest';
+  stopAnimations();
 });
 
 // Mix embed toggles
