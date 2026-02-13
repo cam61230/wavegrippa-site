@@ -293,7 +293,40 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
   </div>
   <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:160px;overflow:hidden;display:none">
     <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanScroll 45s linear infinite;opacity:.25" class="pacman-inner">
-    <svg class="pacman" style="width:2rem;height:2rem" viewBox="0 0 100 100">
+    <!-- Clyde (orange) -->
+    <svg style="width:2rem;height:2rem" viewBox="0 0 100 100">
+      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FFB852"/>
+      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
+      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
+    </svg>
+    <!-- Inky (cyan) -->
+    <svg style="width:2rem;height:2rem;margin-left:.8rem" viewBox="0 0 100 100">
+      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#00FFFF"/>
+      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
+      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
+    </svg>
+    <!-- Pinky (pink) -->
+    <svg style="width:2rem;height:2rem;margin-left:.8rem" viewBox="0 0 100 100">
+      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FFB8FF"/>
+      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
+      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
+    </svg>
+    <!-- Blinky (red) -->
+    <svg style="width:2rem;height:2rem;margin-left:.8rem" viewBox="0 0 100 100">
+      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FF0000"/>
+      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
+      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
+    </svg>
+    <!-- Dots -->
+    <svg style="width:6rem;height:.6rem;margin-left:.8rem" viewBox="0 0 120 12">
+      <circle cx="15" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0s" repeatCount="indefinite"/></circle>
+      <circle cx="40" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.2s" repeatCount="indefinite"/></circle>
+      <circle cx="65" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.4s" repeatCount="indefinite"/></circle>
+      <circle cx="90" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.6s" repeatCount="indefinite"/></circle>
+      <circle cx="115" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.8s" repeatCount="indefinite"/></circle>
+    </svg>
+    <!-- Pac-Man -->
+    <svg class="pacman" style="width:2rem;height:2rem;margin-left:4px" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="45" fill="#FFD700" mask="url(#pacmouth)"/>
       <defs>
         <mask id="pacmouth">
@@ -304,37 +337,6 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
         </mask>
       </defs>
       <circle cx="55" cy="30" r="5" fill="#000"/>
-    </svg>
-    <svg style="width:6rem;height:.6rem;margin-left:4px" viewBox="0 0 120 12">
-      <circle cx="15" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0s" repeatCount="indefinite"/></circle>
-      <circle cx="40" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.2s" repeatCount="indefinite"/></circle>
-      <circle cx="65" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.4s" repeatCount="indefinite"/></circle>
-      <circle cx="90" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.6s" repeatCount="indefinite"/></circle>
-      <circle cx="115" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.8s" repeatCount="indefinite"/></circle>
-    </svg>
-    <!-- Blinky (red) -->
-    <svg style="width:2rem;height:2rem;margin-left:3rem" viewBox="0 0 100 100">
-      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FF0000"/>
-      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
-      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
-    </svg>
-    <!-- Pinky (pink) -->
-    <svg style="width:2rem;height:2rem;margin-left:2rem" viewBox="0 0 100 100">
-      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FFB8FF"/>
-      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
-      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
-    </svg>
-    <!-- Inky (cyan) -->
-    <svg style="width:2rem;height:2rem;margin-left:2rem" viewBox="0 0 100 100">
-      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#00FFFF"/>
-      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
-      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
-    </svg>
-    <!-- Clyde (orange) -->
-    <svg style="width:2rem;height:2rem;margin-left:2rem" viewBox="0 0 100 100">
-      <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FFB852"/>
-      <circle cx="35" cy="40" r="10" fill="#fff"/><circle cx="40" cy="40" r="5" fill="#00f"/>
-      <circle cx="65" cy="40" r="10" fill="#fff"/><circle cx="70" cy="40" r="5" fill="#00f"/>
     </svg>
     </div>
   </div>
