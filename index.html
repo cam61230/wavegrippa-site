@@ -595,12 +595,6 @@ document.getElementById('contactForm').addEventListener('submit',async function(
 });
 
 // Embed toggle (Spotify/Apple Music)
-document.querySelectorAll('.hero-marquee span[style*="flex-shrink"]').forEach(span=>{
-  let html=span.innerHTML;
-  let count=0;
-  html=html.replace(/wavegrippa/g,(m)=>{count++;return count%2===0?'<span class="wg-outline">&nbsp;'+m+'&nbsp;</span>':m;});
-  span.innerHTML=html;
-});
 function toggleMarquee(){
   const rows=document.querySelectorAll('.hero-marquee');
   const pac=document.querySelector('.pacman-inner');
