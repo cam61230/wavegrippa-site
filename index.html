@@ -622,7 +622,7 @@ function toggleMarquee(){
     rows.forEach(r=>r.style.animationPlayState='paused');
     if(pac)pac.style.animationPlayState='paused';
     document.querySelectorAll('.pacman-inner svg').forEach(s=>{try{s.pauseAnimations()}catch(e){}});
-    icon.innerHTML='<i class="fas fa-play"></i>';
+    icon.innerHTML='<i class="fas fa-stop"></i>';
     marqueeState='paused';
   }else{
     // Hide
