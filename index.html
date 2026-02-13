@@ -267,7 +267,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
     <h1>wavegrippa</h1>
     <p class="hero-tagline">Electronic music producer & multi-genre DJ making tunes that slap harder than a wet fish on a Tuesday morning.</p>
     <button class="hero-cta" id="themeBtn" onclick="toggleThemeTune()">
-      <i class="fas fa-play" id="themeBtnIcon"></i> <span id="themeBtnText">Listen to the Theme Tune</span>
+      <i class="fas fa-play" id="themeBtnIcon"></i> <span id="themeBtnText">Listen to the latest</span>
     </button>
     <audio id="themeAudio" src="audio/wavegrippasnippet.mp3" preload="auto"></audio>
   </div>
@@ -568,11 +568,11 @@ function toggleThemeTune(){
   const icon=document.getElementById('themeBtnIcon');
   const text=document.getElementById('themeBtnText');
   if(a.paused){a.play();icon.className='fas fa-pause';text.textContent='Now Playing...';}
-  else{a.pause();icon.className='fas fa-play';text.textContent='Listen to the Theme Tune';}
+  else{a.pause();icon.className='fas fa-play';text.textContent='Listen to the latest';}
 }
 document.getElementById('themeAudio').addEventListener('ended',function(){
   document.getElementById('themeBtnIcon').className='fas fa-play';
-  document.getElementById('themeBtnText').textContent='Listen to the Theme Tune';
+  document.getElementById('themeBtnText').textContent='Listen to the latest';
 });
 
 // Mix embed toggles
