@@ -132,6 +132,7 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 @keyframes marqueeLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes marqueeRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+@keyframes pacmanScroll{0%{transform:translateX(-120px)}100%{transform:translateX(calc(100vw + 120px))}}
 @media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}}
 
 /* CARDS / GRID */
@@ -288,7 +289,8 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
     </button>
     <audio id="themeAudio" src="audio/wavegrippasnippet.mp3" preload="auto"></audio>
   </div>
-  <div aria-hidden="true" style="position:absolute;left:50%;transform:translateX(-50%);bottom:150px;display:flex;align-items:center;justify-content:center">
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:150px;overflow:hidden">
+    <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanScroll 8s linear infinite"
     <svg class="pacman" style="width:2rem;height:2rem" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="45" fill="#FFD700" mask="url(#pacmouth)"/>
       <defs>
@@ -308,6 +310,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
       <circle cx="90" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.6s" repeatCount="indefinite"/></circle>
       <circle cx="115" cy="6" r="4" fill="#FFD700" opacity=".6"><animate attributeName="opacity" values=".6;0;.6" dur="1.2s" begin="0.8s" repeatCount="indefinite"/></circle>
     </svg>
+    </div>
   </div>
   <div class="hero-scroll">
     scroll on down
