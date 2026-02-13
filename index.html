@@ -132,7 +132,6 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 @keyframes marqueeLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes marqueeRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
-[data-theme="light"] .pacman-inner{opacity:.8!important}
 @keyframes pacmanScroll{0%{transform:translateX(calc(-30vw - 150px))}100%{transform:translateX(calc(100vw + 150px))}}
 @keyframes pacmanReturn{0%{transform:translateX(calc(100vw + 150px)) scaleX(-1)}100%{transform:translateX(calc(-30vw - 150px)) scaleX(-1)}}
 .wg-outline{-webkit-text-stroke:.5px var(--accent2);-webkit-text-fill-color:var(--text)}
@@ -293,7 +292,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
     <audio id="themeAudio" src="audio/wavegrippasnippet.mp3" preload="auto"></audio>
   </div>
   <div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:160px;overflow:hidden;display:none">
-    <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanScroll 25s linear forwards;opacity:.25" class="pacman-inner">
+    <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanScroll 25s linear forwards" class="pacman-inner">
     <!-- Clyde (orange) -->
     <svg style="width:2rem;height:2rem" viewBox="0 0 100 100">
       <path d="M10 95 L10 45 Q10 5 50 5 Q90 5 90 45 L90 95 L75 80 L60 95 L50 80 L40 95 L25 80 Z" fill="#FFB852"/>
@@ -341,7 +340,7 @@ footer .bean-quote{font-family:var(--mono);margin-bottom:8px;color:var(--accent2
     </svg>
     </div>
     <!-- Phase 2: Scared ghosts fleeing right to left, Pac-Man chasing -->
-    <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanReturn 25s linear forwards;opacity:.25;display:none" class="pacman-return">
+    <div style="display:flex;align-items:center;white-space:nowrap;animation:pacmanReturn 25s linear forwards;display:none" class="pacman-return">
     <!-- Pac-Man (facing left via scaleX on parent) -->
     <svg class="pacman" style="width:2rem;height:2rem" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="45" fill="#FFD700" mask="url(#pacmouth2)"/>
