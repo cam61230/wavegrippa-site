@@ -608,8 +608,16 @@ function toggleMarquee(){
   const wrap=document.querySelector('.hero-marquee-wrap');
   const btn=document.getElementById('marqueeToggle');
   if(!wrap||!btn)return;
-  const obs=new IntersectionObserver(([e])=>{btn.style.display=e.isIntersecting?'flex':'none'},{threshold:0.1});
+  const pac=document.querySelector('.pacman-inner');
+  const showBtn=()=>{
+    const wrapVis=wrap.getBoundingClientRect().bottom>0&&wrap.getBoundingClientRect().top<window.innerHeight;
+    const pacVis=pac&&pac.getBoundingClientRect().right>0&&pac.getBoundingClientRect().left<window.innerWidth&&pac.closest('[aria-hidden]').getBoundingClientRect().bottom>0&&pac.closest('[aria-hidden]').getBoundingClientRect().top<window.innerHeight;
+    btn.style.display=(wrapVis||pacVis)?'flex':'none';
+  };
+  const obs=new IntersectionObserver(showBtn,{threshold:0});
   obs.observe(wrap);
+  if(pac&&pac.closest('[aria-hidden]'))obs.observe(pac.closest('[aria-hidden]'));
+  window.addEventListener('scroll',showBtn,{passive:true});
 })();
 function showEmbed(which){
   const panels={spotify:document.getElementById('embedSpotify'),bandcamp:document.getElementById('embedBandcamp'),apple:document.getElementById('embedApple')};
