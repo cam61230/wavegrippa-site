@@ -136,7 +136,16 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes pacmanReturn{0%{transform:translateX(calc(100vw + 150px)) scaleX(-1)}100%{transform:translateX(calc(-30vw - 150px)) scaleX(-1)}}
 .wg-outline{-webkit-text-stroke:.5px var(--accent2);-webkit-text-fill-color:var(--text)}
 @media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}.pacman-inner{animation:none!important}.pac-mouth animate,.pacman-dots animate{animation:none!important}}
-@media(orientation:landscape) and (max-height:500px){.pacman-track{bottom:40px!important}}
+@media(orientation:landscape) and (max-height:500px){
+.pacman-track{bottom:20px!important}
+.hero{min-height:100vh;padding-top:calc(var(--nav-h) + 10px);padding-bottom:60px}
+.hero h1{font-size:clamp(3rem,10vw,5rem);margin-bottom:10px}
+.hero-bean{margin-bottom:8px;font-size:.8rem}
+.hero-tagline{margin-bottom:20px;font-size:.9rem}
+.hero-cta{padding:12px 28px;font-size:.9rem}
+.hero-scroll{bottom:30px}
+.hero-marquee-wrap{bottom:75%!important}
+}
 
 /* CARDS / GRID */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
