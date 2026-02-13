@@ -132,6 +132,7 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 @keyframes marqueeLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes marqueeRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}}
 
 /* CARDS / GRID */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
