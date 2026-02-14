@@ -132,8 +132,8 @@ section{padding:40px 24px 40px;position:relative}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 @keyframes marqueeLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes marqueeRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
-@keyframes pacmanScroll{0%{transform:translateX(calc(-30vw - 150px))}100%{transform:translateX(calc(100vw + 150px))}}
-@keyframes pacmanReturn{0%{transform:translateX(calc(100vw + 150px)) scaleX(-1)}100%{transform:translateX(calc(-100vw - 300px)) scaleX(-1)}}
+@keyframes pacmanScroll{0%{transform:translateX(calc(-10vw - 80px))}100%{transform:translateX(calc(100vw + 80px))}}
+@keyframes pacmanReturn{0%{transform:translateX(calc(100vw + 80px)) scaleX(-1)}100%{transform:translateX(calc(-100vw - 80px)) scaleX(-1)}}
 .wg-outline{-webkit-text-stroke:.5px var(--accent2);-webkit-text-fill-color:var(--text)}
 @media(prefers-reduced-motion:reduce){.hero-marquee{animation:none!important}.pacman-inner{animation:none!important}.pacman-return{animation:none!important}.pac-mouth animate,.pacman-dots animate{animation:none!important}.hero-marquee-wrap{display:none!important}.pacman-track{display:none!important}}
 [data-theme="light"] .pacman-inner svg circle[fill="#FFD700"],
@@ -743,9 +743,18 @@ function showEmbed(which){
 
 // Theme tune player
 function canAnimate(){return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;}
+function restartPacman(){
+  const p1=document.querySelector('.pacman-inner');
+  const p2=document.querySelector('.pacman-return');
+  if(!p1||!p2)return;
+  p2.style.display='none';p2.style.animation='none';
+  p1.style.display='flex';p1.style.animation='none';p1.offsetHeight;
+  p1.style.animation='pacmanScroll 12s linear forwards';
+}
 function startAnimations(){
   if(!canAnimate())return;
   if(marqueeState==='off') toggleMarquee();
+  restartPacman();
 }
 function stopAnimations(){
   if(marqueeState==='playing') toggleMarquee(); // pause
