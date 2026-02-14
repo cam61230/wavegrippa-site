@@ -673,23 +673,24 @@ document.querySelectorAll('.hero-marquee span[style*="flex-shrink"]').forEach(sp
   span.innerHTML=html;
 });
 var marqueeState='off';
+var pacPhase1,pacPhase2;
 (function pacCycle(){
   const p1=document.querySelector('.pacman-inner');
   const p2=document.querySelector('.pacman-return');
   if(!p1||!p2)return;
-  function runPhase1(){
+  pacPhase1=function(){
     p1.style.display='flex';p2.style.display='none';
     p1.style.animation='none';p1.offsetHeight;
     p1.style.animation='pacmanScroll 12s linear forwards';
-    p1.addEventListener('animationend',()=>{setTimeout(runPhase2,50)},{once:true});
-  }
-  function runPhase2(){
+    p1.addEventListener('animationend',()=>{setTimeout(pacPhase2,50)},{once:true});
+  };
+  pacPhase2=function(){
     p2.style.display='flex';p1.style.display='none';
     p2.style.animation='none';p2.offsetHeight;
     p2.style.animation='pacmanReturn 12s linear forwards';
-    p2.addEventListener('animationend',()=>{setTimeout(runPhase1,50)},{once:true});
-  }
-  runPhase1();
+    p2.addEventListener('animationend',()=>{setTimeout(pacPhase1,50)},{once:true});
+  };
+  pacPhase1();
 })();
 function toggleMarquee(){
   const wrap=document.querySelector('.hero-marquee-wrap');
@@ -744,12 +745,7 @@ function showEmbed(which){
 // Theme tune player
 function canAnimate(){return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;}
 function restartPacman(){
-  const p1=document.querySelector('.pacman-inner');
-  const p2=document.querySelector('.pacman-return');
-  if(!p1||!p2)return;
-  p2.style.display='none';p2.style.animation='none';
-  p1.style.display='flex';p1.style.animation='none';p1.offsetHeight;
-  p1.style.animation='pacmanScroll 12s linear forwards';
+  if(pacPhase1) pacPhase1();
 }
 function startAnimations(){
   if(!canAnimate())return;
