@@ -123,13 +123,14 @@
 
         .download-btn:active { transform: translateY(0); }
 
-        /* ===== CERTIFICATE (unchanged design) ===== */
+        /* ===== CERTIFICATE ===== */
         .certificate-wrapper {
             width: 800px;
             aspect-ratio: 1 / 1.414;
             position: relative;
             background: #f5f0e1;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(184,156,90,0.3);
+            overflow: hidden;
         }
 
         .border-outer { position: absolute; inset: 12px; border: 3px solid #b89c5a; }
@@ -145,26 +146,27 @@
         .certificate-content {
             position: absolute; inset: 50px;
             display: flex; flex-direction: column; align-items: center;
-            justify-content: space-between; text-align: center; padding: 20px 30px;
+            justify-content: flex-start; text-align: center; padding: 10px 30px 20px;
+            gap: 0;
         }
 
         .header-section { width: 100%; }
-        .institute-crest { font-size: 52px; margin-bottom: 4px; filter: grayscale(30%); }
+        .institute-crest { font-size: 42px; margin-bottom: 2px; filter: grayscale(30%); }
         .institute-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: #8b7332; margin-bottom: 2px; }
-        .institute-full { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #a08a4a; margin-bottom: 8px; }
-        .divider { width: 200px; height: 1px; background: linear-gradient(90deg, transparent, #b89c5a, transparent); margin: 8px auto; }
-        .presents { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: #7a6b3a; margin: 6px 0; }
-        .award-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #4a3c1a; letter-spacing: 2px; line-height: 1.2; margin: 4px 0; }
+        .institute-full { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #a08a4a; margin-bottom: 4px; }
+        .divider { width: 200px; height: 1px; background: linear-gradient(90deg, transparent, #b89c5a, transparent); margin: 4px auto; }
+        .presents { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: #7a6b3a; margin: 4px 0; }
+        .award-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #4a3c1a; letter-spacing: 2px; line-height: 1.2; margin: 2px 0; }
         .award-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: #8b7332; }
 
-        .middle-section { width: 100%; }
+        .middle-section { width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .bestowed { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: #7a6b3a; margin-bottom: 6px; }
         .recipient-name { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #3a2e10; border-bottom: 2px solid #b89c5a; padding-bottom: 6px; display: inline-block; margin-bottom: 10px; letter-spacing: 1px; }
         .category-label { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #7a6b3a; margin-bottom: 2px; }
         .category { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: #5a4a20; margin-bottom: 10px; }
         .citation { font-family: 'Cormorant Garamond', serif; font-size: 12.5px; color: #7a6b3a; max-width: 480px; margin: 0 auto; line-height: 1.6; font-style: italic; }
 
-        .seal-section { position: relative; width: 100%; display: flex; justify-content: center; margin: 4px 0; }
+        .seal-section { position: relative; width: 100%; display: flex; justify-content: center; margin: 8px 0 4px; }
         .seal-container { position: relative; }
         .starburst {
             position: absolute; inset: -12px; border-radius: 50%;
@@ -185,7 +187,7 @@
             opacity: 0.5; z-index: -1;
         }
         .gold-seal {
-            width: 90px; height: 90px; border-radius: 50%;
+            width: 80px; height: 80px; border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #e8d48b, #b89c5a 40%, #8b7332 80%, #6b5522);
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.3);
@@ -199,14 +201,14 @@
         .ribbon-right { left: calc(50% + 0px); transform: skewX(-10deg); clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); }
 
         .footer-section { width: 100%; }
-        .signatures { display: flex; justify-content: space-around; width: 100%; margin-bottom: 10px; }
-        .signature-block { text-align: center; width: 180px; }
-        .signature { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: #3a3a5a; border-bottom: 1px solid #999; padding-bottom: 4px; margin-bottom: 4px; }
+        .date-line { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #7a6b3a; margin-bottom: 10px; margin-top: 4px; }
+        .signatures { display: flex; justify-content: space-around; width: 100%; margin-bottom: 10px; padding: 0 10px; }
+        .signature-block { text-align: center; min-width: 0; flex: 1; padding: 0 8px; }
+        .signature { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: #3a3a5a; border-bottom: 1px solid #999; padding-bottom: 4px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .sig-title { font-family: 'Cormorant Garamond', serif; font-size: 10px; color: #7a6b3a; letter-spacing: 1px; text-transform: uppercase; }
-        .date-line { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #7a6b3a; margin-bottom: 12px; }
         .small-print { font-family: 'Inter', sans-serif; font-size: 7.5px; color: #a09880; letter-spacing: 0.3px; max-width: 500px; margin: 0 auto 6px; }
 
-        .branding { font-family: 'Inter', sans-serif; font-size: 7px; color: #c0b898; letter-spacing: 2px; text-transform: lowercase; position: absolute; bottom: 36px; right: 60px; }
+        .branding { font-family: 'Inter', sans-serif; font-size: 7px; color: #c0b898; letter-spacing: 2px; text-transform: lowercase; position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); }
         .branding .bean { font-size: 9px; }
 
         .certificate-wrapper::before {
@@ -225,7 +227,41 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 840px) {
             .certificate-wrapper, .generator-controls { width: 100%; }
-            .certificate-wrapper { font-size: 0.85em; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            .generator-controls { padding: 18px 16px; }
+
+            .certificate-content { inset: 34px; padding: 8px 16px 14px; }
+            .border-outer { inset: 8px; border-width: 2px; }
+            .border-mid { inset: 14px; }
+            .border-inner { inset: 18px; border-width: 1.5px; }
+
+            /* Corners — smaller and pulled inward */
+            .corner { font-size: 32px; width: 40px; height: 40px; }
+            .corner-tl { top: 20px; left: 20px; }
+            .corner-tr { top: 20px; right: 20px; }
+            .corner-bl { bottom: 20px; left: 20px; }
+            .corner-br { bottom: 20px; right: 20px; }
+
+            .institute-crest { font-size: 32px; }
+            .award-title { font-size: 26px; }
+            .recipient-name { font-size: 24px; }
+            .category { font-size: 16px; }
+            .citation { font-size: 11px; }
+            .signature { font-size: 15px; }
+            .sig-title { font-size: 9px; }
+            .signatures { padding: 0 4px; }
+
+            .gold-seal { width: 65px; height: 65px; }
+            .seal-text { font-size: 8px; }
+            .starburst { inset: -10px; }
+            .ribbon { width: 16px; height: 18px; bottom: -14px; }
+            .ribbon-left { left: calc(50% - 14px); }
+            .ribbon-right { left: calc(50% + 0px); }
+
+            .branding { bottom: 22px; }
         }
     </style>
 </head>
