@@ -159,7 +159,7 @@
         .award-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #4a3c1a; letter-spacing: 2px; line-height: 1.2; margin: 2px 0; }
         .award-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: #8b7332; }
 
-        .middle-section { width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .middle-section { width: 100%; display: flex; flex-direction: column; align-items: center; }
         .bestowed { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: #7a6b3a; margin-bottom: 6px; }
         .recipient-name { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #3a2e10; border-bottom: 2px solid #b89c5a; padding-bottom: 6px; display: inline-block; margin-bottom: 10px; letter-spacing: 1px; }
         .category-label { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #7a6b3a; margin-bottom: 2px; }
@@ -233,52 +233,52 @@
             body { padding: 20px 10px; }
             .generator-controls { padding: 18px 16px; }
 
-            /* Prevent clipping of corners and text */
-            .certificate-wrapper { overflow: visible; }
+            /* Keep everything inside the certificate */
+            .certificate-wrapper { overflow: hidden; }
 
-            .certificate-content { inset: 24px; padding: 2px 20px 10px; }
-            .border-outer { inset: 6px; border-width: 2px; }
-            .border-mid { inset: 11px; }
-            .border-inner { inset: 15px; border-width: 1.5px; }
+            .certificate-content { inset: 20px; padding: 0 16px 8px; }
+            .border-outer { inset: 4px; border-width: 2px; }
+            .border-mid { inset: 8px; }
+            .border-inner { inset: 12px; border-width: 1.5px; }
 
-            /* Corners — all 4 visible within certificate */
-            .corner { font-size: 28px; width: 36px; height: 36px; overflow: visible; }
-            .corner-tl { top: 16px; left: 16px; }
-            .corner-tr { top: 16px; right: 16px; }
-            .corner-bl { bottom: 16px; left: 16px; }
-            .corner-br { bottom: 16px; right: 16px; }
+            /* Corners — all 4, positioned inside the inner border */
+            .corner { font-size: 22px; width: 30px; height: 30px; }
+            .corner-tl { top: 14px; left: 14px; }
+            .corner-tr { top: 14px; right: 14px; }
+            .corner-bl { bottom: 14px; left: 14px; }
+            .corner-br { bottom: 14px; right: 14px; }
 
-            /* Reduce top spacing aggressively */
-            .header-section { margin-top: 0; }
-            .institute-crest { font-size: 28px; margin-bottom: 0; }
-            .institute-name { font-size: 13px; letter-spacing: 4px; margin-bottom: 1px; }
-            .institute-full { font-size: 9px; letter-spacing: 2px; margin-bottom: 2px; }
-            .divider { margin: 2px auto; }
-            .presents { font-size: 12px; margin: 2px 0; }
-            .award-title { font-size: 22px; margin: 1px 0; }
-            .award-subtitle { font-size: 11px; letter-spacing: 3px; }
+            /* Kill top spacing */
+            .header-section { margin-top: 0; padding-top: 0; }
+            .institute-crest { font-size: 24px; margin-bottom: 0; line-height: 1; }
+            .institute-name { font-size: 12px; letter-spacing: 3px; margin-bottom: 0; }
+            .institute-full { font-size: 8px; letter-spacing: 2px; margin-bottom: 2px; }
+            .divider { margin: 2px auto; width: 140px; }
+            .presents { font-size: 11px; margin: 1px 0; }
+            .award-title { font-size: 20px; margin: 0; }
+            .award-subtitle { font-size: 10px; letter-spacing: 2px; }
 
-            .bestowed { font-size: 13px; margin-bottom: 4px; }
-            .recipient-name { font-size: 20px; padding-bottom: 4px; margin-bottom: 6px; }
-            .category-label { font-size: 11px; }
-            .category { font-size: 14px; margin-bottom: 6px; }
-            .citation { font-size: 10px; max-width: 100%; padding: 0 4px; word-wrap: break-word; overflow-wrap: break-word; }
+            .bestowed { font-size: 11px; margin-bottom: 2px; }
+            .recipient-name { font-size: 18px; padding-bottom: 3px; margin-bottom: 4px; }
+            .category-label { font-size: 10px; }
+            .category { font-size: 13px; margin-bottom: 4px; }
+            .citation { font-size: 9px; max-width: 100%; padding: 0 8px; word-wrap: break-word; overflow-wrap: break-word; }
 
-            .seal-section { margin: 4px 0 2px; }
-            .gold-seal { width: 55px; height: 55px; }
-            .seal-text { font-size: 7px; }
-            .starburst { inset: -8px; }
-            .ribbon { width: 14px; height: 16px; bottom: -12px; }
-            .ribbon-left { left: calc(50% - 12px); }
+            .seal-section { margin: 2px 0 0; }
+            .gold-seal { width: 48px; height: 48px; }
+            .seal-text { font-size: 6px; }
+            .starburst { inset: -6px; }
+            .ribbon { width: 12px; height: 14px; bottom: -10px; }
+            .ribbon-left { left: calc(50% - 10px); }
             .ribbon-right { left: calc(50% + 0px); }
 
-            .date-line { font-size: 10px; margin-bottom: 6px; margin-top: 2px; }
-            .signature { font-size: 14px; }
-            .sig-title { font-size: 8px; }
-            .signatures { padding: 0 2px; margin-bottom: 6px; }
-            .small-print { font-size: 6.5px; margin-bottom: 4px; }
+            .date-line { font-size: 9px; margin-bottom: 4px; margin-top: 2px; }
+            .signature { font-size: 13px; }
+            .sig-title { font-size: 7px; }
+            .signatures { padding: 0 2px; margin-bottom: 4px; }
+            .small-print { font-size: 6px; margin-bottom: 2px; }
 
-            .branding { bottom: 18px; font-size: 6px; }
+            .branding { bottom: 14px; font-size: 6px; }
         }
     </style>
 </head>
