@@ -233,35 +233,52 @@
             body { padding: 20px 10px; }
             .generator-controls { padding: 18px 16px; }
 
-            .certificate-content { inset: 34px; padding: 8px 16px 14px; }
-            .border-outer { inset: 8px; border-width: 2px; }
-            .border-mid { inset: 14px; }
-            .border-inner { inset: 18px; border-width: 1.5px; }
+            /* Prevent clipping of corners and text */
+            .certificate-wrapper { overflow: visible; }
 
-            /* Corners — smaller and pulled inward */
-            .corner { font-size: 32px; width: 40px; height: 40px; }
-            .corner-tl { top: 20px; left: 20px; }
-            .corner-tr { top: 20px; right: 20px; }
-            .corner-bl { bottom: 20px; left: 20px; }
-            .corner-br { bottom: 20px; right: 20px; }
+            .certificate-content { inset: 24px; padding: 2px 20px 10px; }
+            .border-outer { inset: 6px; border-width: 2px; }
+            .border-mid { inset: 11px; }
+            .border-inner { inset: 15px; border-width: 1.5px; }
 
-            .institute-crest { font-size: 32px; }
-            .award-title { font-size: 26px; }
-            .recipient-name { font-size: 24px; }
-            .category { font-size: 16px; }
-            .citation { font-size: 11px; }
-            .signature { font-size: 15px; }
-            .sig-title { font-size: 9px; }
-            .signatures { padding: 0 4px; }
+            /* Corners — all 4 visible within certificate */
+            .corner { font-size: 28px; width: 36px; height: 36px; overflow: visible; }
+            .corner-tl { top: 16px; left: 16px; }
+            .corner-tr { top: 16px; right: 16px; }
+            .corner-bl { bottom: 16px; left: 16px; }
+            .corner-br { bottom: 16px; right: 16px; }
 
-            .gold-seal { width: 65px; height: 65px; }
-            .seal-text { font-size: 8px; }
-            .starburst { inset: -10px; }
-            .ribbon { width: 16px; height: 18px; bottom: -14px; }
-            .ribbon-left { left: calc(50% - 14px); }
+            /* Reduce top spacing aggressively */
+            .header-section { margin-top: 0; }
+            .institute-crest { font-size: 28px; margin-bottom: 0; }
+            .institute-name { font-size: 13px; letter-spacing: 4px; margin-bottom: 1px; }
+            .institute-full { font-size: 9px; letter-spacing: 2px; margin-bottom: 2px; }
+            .divider { margin: 2px auto; }
+            .presents { font-size: 12px; margin: 2px 0; }
+            .award-title { font-size: 22px; margin: 1px 0; }
+            .award-subtitle { font-size: 11px; letter-spacing: 3px; }
+
+            .bestowed { font-size: 13px; margin-bottom: 4px; }
+            .recipient-name { font-size: 20px; padding-bottom: 4px; margin-bottom: 6px; }
+            .category-label { font-size: 11px; }
+            .category { font-size: 14px; margin-bottom: 6px; }
+            .citation { font-size: 10px; max-width: 100%; padding: 0 4px; word-wrap: break-word; overflow-wrap: break-word; }
+
+            .seal-section { margin: 4px 0 2px; }
+            .gold-seal { width: 55px; height: 55px; }
+            .seal-text { font-size: 7px; }
+            .starburst { inset: -8px; }
+            .ribbon { width: 14px; height: 16px; bottom: -12px; }
+            .ribbon-left { left: calc(50% - 12px); }
             .ribbon-right { left: calc(50% + 0px); }
 
-            .branding { bottom: 22px; }
+            .date-line { font-size: 10px; margin-bottom: 6px; margin-top: 2px; }
+            .signature { font-size: 14px; }
+            .sig-title { font-size: 8px; }
+            .signatures { padding: 0 2px; margin-bottom: 6px; }
+            .small-print { font-size: 6.5px; margin-bottom: 4px; }
+
+            .branding { bottom: 18px; font-size: 6px; }
         }
     </style>
 </head>
