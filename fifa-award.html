@@ -231,14 +231,12 @@
         }
 
         @media (max-width: 600px) {
-            body { padding: 20px 10px; }
-            .generator-controls { padding: 18px 16px; }
+            body { padding: 10px 6px; }
+            .generator-controls { padding: 14px 12px; margin-bottom: 12px; }
 
-            /* Keep everything inside the certificate */
-            .certificate-wrapper { overflow: hidden; }
-
-            .certificate-wrapper { aspect-ratio: auto; }
-            .certificate-content { position: relative; inset: auto; padding: 10px 16px 8px; }
+            /* Kill fixed height, let content drive size */
+            .certificate-wrapper { overflow: hidden; aspect-ratio: auto; }
+            .certificate-content { position: relative; inset: auto; padding: 6px 14px 6px; }
             .border-outer { inset: 4px; border-width: 2px; }
             .border-mid { inset: 8px; }
             .border-inner { inset: 12px; border-width: 1.5px; }
