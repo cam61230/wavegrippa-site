@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA Peace Award Certificate Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== GENERATOR CONTROLS ===== */
+        .generator-controls {
+            width: 800px;
+            max-width: 100%;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(184,156,90,0.25);
+            border-radius: 12px;
+            padding: 28px 32px;
+            backdrop-filter: blur(10px);
+        }
+
+        .generator-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #d4b95e;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #a09880;
+            margin-bottom: 6px;
+        }
+
+        .control-group input,
+        .control-group select {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(184,156,90,0.3);
+            border-radius: 6px;
+            color: #f0e8d0;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            border-color: #d4b95e;
+        }
+
+        .control-group select option {
+            background: #1a1a2e;
+            color: #f0e8d0;
+        }
+
+        .control-group input::placeholder {
+            color: rgba(240,232,208,0.35);
+        }
+
+        #customCategory {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .download-row {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 12px 36px;
+            background: linear-gradient(135deg, #b89c5a, #d4b95e);
+            color: #1a1a2e;
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(184,156,90,0.4);
+        }
+
+        .download-btn:active { transform: translateY(0); }
+
+        /* ===== CERTIFICATE (unchanged design) ===== */
+        .certificate-wrapper {
+            width: 800px;
+            aspect-ratio: 1 / 1.414;
+            position: relative;
+            background: #f5f0e1;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(184,156,90,0.3);
+        }
+
+        .border-outer { position: absolute; inset: 12px; border: 3px solid #b89c5a; }
+        .border-mid { position: absolute; inset: 20px; border: 1px solid #c9b06b; }
+        .border-inner { position: absolute; inset: 26px; border: 2px solid #b89c5a; }
+
+        .corner { position: absolute; width: 60px; height: 60px; color: #b89c5a; font-size: 48px; line-height: 1; font-family: serif; }
+        .corner-tl { top: 30px; left: 30px; }
+        .corner-tr { top: 30px; right: 30px; transform: scaleX(-1); }
+        .corner-bl { bottom: 30px; left: 30px; transform: scaleY(-1); }
+        .corner-br { bottom: 30px; right: 30px; transform: scale(-1,-1); }
+
+        .certificate-content {
+            position: absolute; inset: 50px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: space-between; text-align: center; padding: 20px 30px;
+        }
+
+        .header-section { width: 100%; }
+        .institute-crest { font-size: 52px; margin-bottom: 4px; filter: grayscale(30%); }
+        .institute-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: #8b7332; margin-bottom: 2px; }
+        .institute-full { font-family: 'Cormorant Garamond', serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #a08a4a; margin-bottom: 8px; }
+        .divider { width: 200px; height: 1px; background: linear-gradient(90deg, transparent, #b89c5a, transparent); margin: 8px auto; }
+        .presents { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: #7a6b3a; margin: 6px 0; }
+        .award-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: #4a3c1a; letter-spacing: 2px; line-height: 1.2; margin: 4px 0; }
+        .award-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: #8b7332; }
+
+        .middle-section { width: 100%; }
+        .bestowed { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: #7a6b3a; margin-bottom: 6px; }
+        .recipient-name { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: #3a2e10; border-bottom: 2px solid #b89c5a; padding-bottom: 6px; display: inline-block; margin-bottom: 10px; letter-spacing: 1px; }
+        .category-label { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: #7a6b3a; margin-bottom: 2px; }
+        .category { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: #5a4a20; margin-bottom: 10px; }
+        .citation { font-family: 'Cormorant Garamond', serif; font-size: 12.5px; color: #7a6b3a; max-width: 480px; margin: 0 auto; line-height: 1.6; font-style: italic; }
+
+        .seal-section { position: relative; width: 100%; display: flex; justify-content: center; margin: 4px 0; }
+        .seal-container { position: relative; }
+        .starburst {
+            position: absolute; inset: -12px; border-radius: 50%;
+            background: conic-gradient(from 0deg,
+                #d4b95e 0deg, transparent 10deg, transparent 15deg, #d4b95e 15deg, transparent 25deg,
+                transparent 30deg, #d4b95e 30deg, transparent 40deg, transparent 45deg, #d4b95e 45deg, transparent 55deg,
+                transparent 60deg, #d4b95e 60deg, transparent 70deg, transparent 75deg, #d4b95e 75deg, transparent 85deg,
+                transparent 90deg, #d4b95e 90deg, transparent 100deg, transparent 105deg, #d4b95e 105deg, transparent 115deg,
+                transparent 120deg, #d4b95e 120deg, transparent 130deg, transparent 135deg, #d4b95e 135deg, transparent 145deg,
+                transparent 150deg, #d4b95e 150deg, transparent 160deg, transparent 165deg, #d4b95e 165deg, transparent 175deg,
+                transparent 180deg, #d4b95e 180deg, transparent 190deg, transparent 195deg, #d4b95e 195deg, transparent 205deg,
+                transparent 210deg, #d4b95e 210deg, transparent 220deg, transparent 225deg, #d4b95e 225deg, transparent 235deg,
+                transparent 240deg, #d4b95e 240deg, transparent 250deg, transparent 255deg, #d4b95e 255deg, transparent 265deg,
+                transparent 270deg, #d4b95e 270deg, transparent 280deg, transparent 285deg, #d4b95e 285deg, transparent 295deg,
+                transparent 300deg, #d4b95e 300deg, transparent 310deg, transparent 315deg, #d4b95e 315deg, transparent 325deg,
+                transparent 330deg, #d4b95e 330deg, transparent 340deg, transparent 345deg, #d4b95e 345deg, transparent 355deg
+            );
+            opacity: 0.5; z-index: -1;
+        }
+        .gold-seal {
+            width: 90px; height: 90px; border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #e8d48b, #b89c5a 40%, #8b7332 80%, #6b5522);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.3);
+            position: relative;
+        }
+        .gold-seal::before { content: ''; position: absolute; inset: 4px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.25); }
+        .gold-seal::after { content: ''; position: absolute; inset: 8px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); }
+        .seal-text { font-family: 'Playfair Display', serif; font-size: 9px; font-weight: 700; color: #3a2e10; text-transform: uppercase; letter-spacing: 1px; text-align: center; line-height: 1.3; text-shadow: 0 1px 1px rgba(255,255,255,0.2); }
+        .ribbon { position: absolute; bottom: -18px; width: 20px; height: 22px; background: #c41e3a; }
+        .ribbon-left { left: calc(50% - 18px); transform: skewX(10deg); clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); }
+        .ribbon-right { left: calc(50% + 0px); transform: skewX(-10deg); clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%); }
+
+        .footer-section { width: 100%; }
+        .signatures { display: flex; justify-content: space-around; width: 100%; margin-bottom: 10px; }
+        .signature-block { text-align: center; width: 180px; }
+        .signature { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: #3a3a5a; border-bottom: 1px solid #999; padding-bottom: 4px; margin-bottom: 4px; }
+        .sig-title { font-family: 'Cormorant Garamond', serif; font-size: 10px; color: #7a6b3a; letter-spacing: 1px; text-transform: uppercase; }
+        .date-line { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #7a6b3a; margin-bottom: 12px; }
+        .small-print { font-family: 'Inter', sans-serif; font-size: 7.5px; color: #a09880; letter-spacing: 0.3px; max-width: 500px; margin: 0 auto 6px; }
+
+        .branding { font-family: 'Inter', sans-serif; font-size: 7px; color: #c0b898; letter-spacing: 2px; text-transform: lowercase; position: absolute; bottom: 36px; right: 60px; }
+        .branding .bean { font-size: 9px; }
+
+        .certificate-wrapper::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,115,50,0.015) 3px, rgba(139,115,50,0.015) 4px),
+                radial-gradient(ellipse at 20% 50%, rgba(184,156,90,0.06), transparent 70%),
+                radial-gradient(ellipse at 80% 30%, rgba(184,156,90,0.04), transparent 60%);
+            pointer-events: none; z-index: 0;
+        }
+
+        .certificate-wrapper > * { position: relative; z-index: 1; }
+        .border-outer, .border-mid, .border-inner, .branding { z-index: 1; }
+        .certificate-content { z-index: 2; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 840px) {
+            .certificate-wrapper, .generator-controls { width: 100%; }
+            .certificate-wrapper { font-size: 0.85em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Generator Controls -->
+    <div class="generator-controls">
+        <div class="generator-title">🏛️ Certificate Generator</div>
+        <div class="control-row">
+            <div class="control-group">
+                <label>Recipient Name</label>
+                <input type="text" id="nameInput" placeholder="Enter name..." maxlength="40">
+            </div>
+            <div class="control-group">
+                <label>Award Category</label>
+                <select id="categorySelect">
+                    <option value="Outstanding Contribution to World Peace">Outstanding Contribution to World Peace</option>
+                    <option value="Excellence in Sofa Sitting">Excellence in Sofa Sitting</option>
+                    <option value="Distinguished Service to Kettle Boiling">Distinguished Service to Kettle Boiling</option>
+                    <option value="Outstanding Achievement in Doing Nothing">Outstanding Achievement in Doing Nothing</option>
+                    <option value="Services to Biscuit Dunking">Services to Biscuit Dunking</option>
+                    <option value="Excellence in Queue Standing">Excellence in Queue Standing</option>
+                    <option value="Heroic Commitment to Staying in Bed">Heroic Commitment to Staying in Bed</option>
+                    <option value="Lifetime Achievement in Procrastination">Lifetime Achievement in Procrastination</option>
+                    <option value="Distinguished Contribution to Talking Rubbish">Distinguished Contribution to Talking Rubbish</option>
+                    <option value="Services to Looking Busy">Services to Looking Busy</option>
+                    <option value="__custom__">✏️ Custom category...</option>
+                </select>
+                <input type="text" id="customCategory" placeholder="Type your custom category...">
+            </div>
+        </div>
+        <div class="download-row">
+            <button class="download-btn" onclick="downloadCertificate()">⬇ Download as PNG</button>
+        </div>
+    </div>
+
+    <!-- Certificate Preview -->
+    <div class="certificate-wrapper" id="certificate">
+        <div class="border-outer"></div>
+        <div class="border-mid"></div>
+        <div class="border-inner"></div>
+
+        <div class="corner corner-tl">❧</div>
+        <div class="corner corner-tr">❧</div>
+        <div class="corner corner-bl">❧</div>
+        <div class="corner corner-br">❧</div>
+
+        <div class="certificate-content">
+            <div class="header-section">
+                <div class="institute-crest">🏛️</div>
+                <div class="institute-name">F.I.F.A.</div>
+                <div class="institute-full">Fictional Institute of Fine Accomplishments</div>
+                <div class="divider"></div>
+                <div class="presents">hereby presents the</div>
+                <div class="award-title">Peace Award</div>
+                <div class="award-subtitle">Certificate of Distinction</div>
+            </div>
+
+            <div class="middle-section">
+                <div class="divider"></div>
+                <div class="bestowed">This honour is bestowed upon</div>
+                <div class="recipient-name" id="certName">YOUR NAME HERE</div>
+                <div class="category-label">in recognition of</div>
+                <div class="category" id="certCategory">"Outstanding Contribution to World Peace"</div>
+                <div class="citation">
+                    For services rendered to humanity through the medium of existing,
+                    and for consistently achieving the bare minimum required
+                    to not make things actively worse.
+                </div>
+            </div>
+
+            <div class="seal-section">
+                <div class="seal-container">
+                    <div class="starburst"></div>
+                    <div class="gold-seal">
+                        <div class="seal-text">FIFA<br>Official<br>Seal</div>
+                    </div>
+                    <div class="ribbon ribbon-left"></div>
+                    <div class="ribbon ribbon-right"></div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <div class="date-line" id="certDate"></div>
+                <div class="signatures">
+                    <div class="signature-block">
+                        <div class="signature">Dr. B. Legume</div>
+                        <div class="sig-title">Director of Ceremonies</div>
+                    </div>
+                    <div class="signature-block">
+                        <div class="signature">Prof. H. Beane</div>
+                        <div class="sig-title">Chief Accomplishment Officer</div>
+                    </div>
+                </div>
+                <div class="small-print">
+                    This award carries no value, authority, or credibility — much like the real thing.
+                    <br>Certificate No. WG-2026-0218 &nbsp;|&nbsp; Printed on 100% recycled delusion
+                </div>
+            </div>
+        </div>
+
+        <div class="branding"><span class="bean">🫘</span> wavegrippa</div>
+    </div>
+
+    <script>
+        // Format today's date nicely
+        function formatDate() {
+            const d = new Date();
+            const day = d.getDate();
+            const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            const suffix = (day===1||day===21||day===31)?'st':(day===2||day===22)?'nd':(day===3||day===23)?'rd':'th';
+            return `Awarded this ${day}${suffix} day of ${months[d.getMonth()]}, ${d.getFullYear()}`;
+        }
+
+        // Init date
+        document.getElementById('certDate').textContent = formatDate();
+
+        // Live name update
+        document.getElementById('nameInput').addEventListener('input', function() {
+            document.getElementById('certName').textContent = this.value || 'YOUR NAME HERE';
+        });
+
+        // Category select
+        const categorySelect = document.getElementById('categorySelect');
+        const customInput = document.getElementById('customCategory');
+
+        categorySelect.addEventListener('change', function() {
+            if (this.value === '__custom__') {
+                customInput.style.display = 'block';
+                customInput.focus();
+                document.getElementById('certCategory').textContent = customInput.value ? `"${customInput.value}"` : '"Your Custom Category"';
+            } else {
+                customInput.style.display = 'none';
+                document.getElementById('certCategory').textContent = `"${this.value}"`;
+            }
+        });
+
+        customInput.addEventListener('input', function() {
+            document.getElementById('certCategory').textContent = `"${this.value || 'Your Custom Category'}"`;
+        });
+
+        // Download
+        function downloadCertificate() {
+            const btn = document.querySelector('.download-btn');
+            btn.textContent = '⏳ Generating...';
+            btn.disabled = true;
+
+            html2canvas(document.getElementById('certificate'), {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#f5f0e1'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                const name = document.getElementById('nameInput').value || 'certificate';
+                link.download = `FIFA-Peace-Award-${name.replace(/\s+/g, '-')}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                btn.textContent = '⬇ Download as PNG';
+                btn.disabled = false;
+            }).catch(() => {
+                btn.textContent = '⬇ Download as PNG';
+                btn.disabled = false;
+                alert('Download failed — try a different browser.');
+            });
+        }
+    </script>
+</body>
+</html>
